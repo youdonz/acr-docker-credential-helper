@@ -25,12 +25,12 @@ func TestMain(m *testing.M) {
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
 		fmt.Fprintf(os.Stderr, "failed to build binary: %v\n", err)
-		os.RemoveAll(tmpDir)
+		_ = os.RemoveAll(tmpDir)
 		os.Exit(1)
 	}
 
 	exitCode := m.Run()
-	os.RemoveAll(tmpDir)
+	_ = os.RemoveAll(tmpDir)
 	os.Exit(exitCode)
 }
 

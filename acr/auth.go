@@ -132,7 +132,8 @@ func (a *AzureAuthenticator) ExchangeForACRToken(
 	if err != nil {
 		return "", fmt.Errorf("token exchange request failed: %w", err)
 	}
-	defer resp.Body.Close()
+
+	defer func() { _ = resp.Body.Close() }()
 
 	// Check response status
 	if resp.StatusCode != http.StatusOK {
